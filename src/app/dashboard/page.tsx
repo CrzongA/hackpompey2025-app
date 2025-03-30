@@ -13,8 +13,12 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
+import { Card } from "@/components/ui/card"
+import GMaps from "./map"
+import { extractCO2, readStoredData, sensorLocations } from "@/lib/data"
 
 export default function Page() {
+  const co2data = extractCO2()
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -26,24 +30,22 @@ export default function Page() {
             <BreadcrumbList>
               <BreadcrumbItem className="hidden md:block">
                 <BreadcrumbLink href="#">
-                  Building Your Application
+                  HackPompey 
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator className="hidden md:block" />
               <BreadcrumbItem>
-                <BreadcrumbPage>Data Fetching</BreadcrumbPage>
+                <BreadcrumbPage>CO<sup>2</sup> Visualization</BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4">
-          <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-            <div className="aspect-video rounded-xl bg-muted/50" />
-            <div className="aspect-video rounded-xl bg-muted/50" />
-            <div className="aspect-video rounded-xl bg-muted/50" />
-          </div>
-          <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min" />
+          <Card className="min-h-[30rem]">
+            <GMaps co2={co2data} sensors={sensorLocations}/>
+          </Card>
         </div>
+
       </SidebarInset>
     </SidebarProvider>
   )
