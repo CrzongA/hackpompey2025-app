@@ -14,8 +14,9 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar"
 import { Card } from "@/components/ui/card"
-import GMaps from "./map"
 import { extractCO2, readStoredData, sensorLocations } from "@/lib/data"
+import GMaps from "./map"
+import { GOOGLE_API_KEY } from "@/lib/env";
 
 export default function Page() {
   const co2data = extractCO2()
@@ -35,14 +36,14 @@ export default function Page() {
               </BreadcrumbItem>
               <BreadcrumbSeparator className="hidden md:block" />
               <BreadcrumbItem>
-                <BreadcrumbPage>CO<sup>2</sup> Visualization</BreadcrumbPage>
+                <BreadcrumbPage>CO<sub>2</sub> Visualization</BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4">
-          <Card className="min-h-[30rem]">
-            <GMaps co2={co2data} sensors={sensorLocations}/>
+          <Card className="min-h-[40rem]">
+            <GMaps co2={co2data} sensors={sensorLocations} apiKey={GOOGLE_API_KEY}/>
           </Card>
         </div>
 

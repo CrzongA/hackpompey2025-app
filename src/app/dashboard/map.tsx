@@ -13,7 +13,6 @@ import { SatelliteDish } from "lucide-react";
 import { useMemo, useState, useEffect } from "react";
 import { Slider } from "@/components/ui/slider";
 import moment from "moment";
-import { GOOGLE_API_KEY } from "@/lib/env";
 
 const Heatmap = ({ data, show, sensors, time }) => {
     const map = useMap();
@@ -72,7 +71,7 @@ const Heatmap = ({ data, show, sensors, time }) => {
     return null;
 };
 
-export default function GMaps({ co2, sensors }) {
+export default function GMaps({ co2, sensors, apiKey}) {
     const [showHeatmap, setShowHeatmap] = useState(true);
     const [time, setTime] = useState(
         moment(co2[0]["Timestamp"], "DD-MM-YYYY hh:mm").valueOf()
@@ -108,7 +107,7 @@ export default function GMaps({ co2, sensors }) {
                 />
             </div>
             <APIProvider
-                apiKey={GOOGLE_API_KEY}
+                apiKey={apiKey}
                 onLoad={() => console.log("Maps API has loaded.")}
             >
                 <Map
